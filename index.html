@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pro Resume Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PDF LIB -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    body{
+      margin:0;
+      font-family: system-ui;
+      background: linear-gradient(135deg,#0f172a,#1e293b);
+      color:white;
+    }
+
+    .header{
+      text-align:center;
+      padding:20px;
+      font-size:22px;
+      font-weight:bold;
+    }
+
+    .container{
+      display:flex;
+      flex-wrap:wrap;
+      gap:15px;
+      padding:20px;
+      justify-content:center;
+    }
+
+    .card{
+      background:#111827;
+      padding:15px;
+      border-radius:12px;
+      width:320px;
+      box-shadow:0 0 15px rgba(0,0,0,0.4);
+    }
+
+    input,textarea{
+      width:100%;
+      margin:6px 0;
+      padding:10px;
+      border-radius:8px;
+      border:none;
+      outline:none;
+    }
+
+    textarea{
+      min-height:60px;
+    }
+
+    button{
+      width:100%;
+      padding:10px;
+      margin-top:8px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    .btn1{ background:#2563eb; color:white; }
+    .btn2{ background:#10b981; color:white; }
+
+    .preview{
+      flex:1;
+      min-width:300px;
+      background:white;
+      color:black;
+      border-radius:12px;
+      padding:20px;
+    }
+
+    .name{
+      font-size:24px;
+      font-weight:bold;
+    }
+
+    .section{
+      margin-top:10px;
+    }
+
+    .label{
+      font-weight:bold;
+      color:#2563eb;
+    }
+
+    .note{
+      text-align:center;
+      font-size:12px;
+      color:#94a3b8;
+      margin-top:10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">🚀 Pro Resume Builder (Secure SaaS Style)</div>
+
+<div class="container">
+
+  <!-- INPUT -->
+  <div class="card">
+
+    <input id="name" placeholder="Full Name">
+    <input id="email" placeholder="Email">
+    <input id="phone" placeholder="Phone">
+
+    <textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+    <textarea id="exp" placeholder="Experience"></textarea>
+    <textarea id="edu" placeholder="Education"></textarea>
+
+    <button class="btn1" onclick="generate()">Generate Resume</button>
+    <button class="btn2" onclick="downloadPDF()">Download PDF</button>
+
+    <div class="note">
+      🔒 Your data stays in your browser. Nothing is stored.
+    </div>
+
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview" id="resume">
+
+    <div class="name" id="rname">Your Name</div>
+    <div id="contact"></div>
+
+    <div class="section">
+      <div class="label">Skills</div>
+      <p id="rskills"></p>
+    </div>
+
+    <div class="section">
+      <div class="label">Experience</div>
+      <p id="rexp"></p>
+    </div>
+
+    <div class="section">
+      <div class="label">Education</div>
+      <p id="redu"></p>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function generate(){
+
+  document.getElementById("rname").innerText =
+    document.getElementById("name").value;
+
+  document.getElementById("contact").innerText =
+    document.getElementById("email").value +
+    " | " +
+    document.getElementById("phone").value;
+
+  document.getElementById("rskills").innerText =
+    document.getElementById("skills").value;
+
+  document.getElementById("rexp").innerText =
+    document.getElementById("exp").value;
+
+  document.getElementById("redu").innerText =
+    document.getElementById("edu").value;
+}
+
+function downloadPDF(){
+  html2pdf().from(document.getElementById("resume")).save("resume.pdf");
+}
+</script>
+
+</body>
+      </html>
